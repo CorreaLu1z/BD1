@@ -1,59 +1,48 @@
-CREATE TABLE agencia(
+CREATE TABLE hospede(
 
-id_agencia INT(11) NOT NULL AUTO_INCREMENT,
-nome_agencia VARCHAR(45) NOT NULL,
-cidade_agencia VARCHAR(45) NOT NULL,
-ativos_agencia INT NOT NULL,
+hospede_id INT(11) NOT NULL AUTO_INCREMENT,
+nome VARCHAR(45) NOT NULL,
+cpf CHAR(11) NOT NULL,
+telefone CHAR(11) NOT NULL,
+email VARCHAR(45) NOT NULL,
 
-PRIMARY KEY (id_agencia)
+PRIMARY KEY (hospede_id)
 );
 
-CREATE TABLE CONTA(
-id_conta INT NOT NULL AUTO_INCREMENT,
-saldo_conta DECIMAL(10, 2) NOT NULL,
-id_agencia INT NOT NULL,
-id_cliente INT NOT NULL,
+CREATE TABLE usuario(
+usuario_id INT NOT NULL AUTO_INCREMENT,
+nome VARCHAR(45) NOT NULL,
+cargo VARCHAR(45) NOT NULL,
+cpf CHAR(11) NOT NULL,
+telefone CHAR(11) NOT NULL,
+email VARCHAR(45) NOT NULL,
 
-PRIMARY KEY(id_conta),
-FOREIGN KEY(id_agencia) REFERENCES agencia(id_agencia),
-FOREIGN KEY(id_agencia) REFERENCES cliente(id_cliente)
+PRIMARY KEY(usuario_id)
 );
 
-CREATE TABLE cliente(
-id_cliente INT NOT NULL AUTO_INCREMENT,
-nome_cliente VARCHAR(45) NOT NULL,
-cidade_cliente VARCHAR(45) NOT NULL,
-endereco_cliente VARCHAR(45) NOT NULL,
-PRIMARY KEY (id_cliente)
+CREATE TABLE quarto(
+quarto_id INT NOT NULL AUTO_INCREMENT,
+tipo VARCHAR(45) NOT NULL,
+disponibilidade BOOLEAN,
+valor_diaria DECIMAL(10, 2) NOT NULL,
+
+PRIMARY KEY (quarto_id)
 );
 
-CREATE TABLE deposito(
-id_deposito INT NOT NULL AUTO_INCREMENT,
-id_cliente INT(11) NOT NULL,
-id_conta INT(11) NOT NULL,
-valor DECIMAL(10, 2),
-PRIMARY KEY (id_deposito),
-FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
-FOREIGN KEY (id_conta) REFERENCES conta(id_conta)
+CREATE TABLE reserva(
+reserva_id	 INT NOT NULL AUTO_INCREMENT,
+data_reserva DATE NOT NULL,
+data_checkin DATE NOT NULL,
+data_checkout DATE NOT NULL,
+hospede_id INT(11) NOT NULL,
+usuario_id INT(11) NOT NULL,
+quarto_id INT(11) NOT NULL,
+
+PRIMARY KEY (reserva_id),
+FOREIGN KEY (hospede_id) REFERENCES hospede(hospede_id),
+FOREIGN KEY (usuario_id) REFERENCES usuario(usuario_id),
+FOREIGN KEY (quarto_id) REFERENCES quarto(quarto_id)
 );
 
-CREATE TABLE emprestimo(
-id_emprestimo INT(11) NOT NULL AUTO_INCREMENT,
-id_cliente INT(11) NOT NULL,
-valor_inicial DECIMAL(10,2) NOT NULL,
-saldo DECIMAL(10,2) NOT NULL,
-
-PRIMARY KEY (id_emprestimo),
-FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
-);
-
-CREATE TABLE pagamento(
-id_pagamento INT(11) NOT NULL AUTO_INCREMENT,
-id_emprestimo INT(11) NOT NULL,
-valor DECIMAL(10, 2),
-
-PRIMARY KEY (id_pagamento),
-FOREIGN KEY (id_emprestimo) REFERENCES emprestimo(id_emprestimo)
-);
 
 
