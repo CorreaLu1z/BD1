@@ -1,7 +1,7 @@
 # BD1
 Aula de Banco de Dados no SENAI.
 
-Exercício proposto pela professora explicado no documento XXXX.pdf Karize.
+Exercício proposto pela professora Karize em sala.
 
 Respostas dos exercícios e documentação no arquivo Documentação.docx
 
